@@ -1,0 +1,53 @@
+<ngx-spinner></ngx-spinner>
+<div class="detail-desc" *ngIf="detailData; else blankPage">
+  <span class="city-name font-weight-bold">{{ detailData.name }}</span>
+  <div class="pull-right refresh">
+    <span class="close cursor">
+      <i class="fa fa-refresh" (click)="refreshAll(detailData.name)"></i>
+    </span>
+  </div>
+
+  <div class="row p-4">
+    <div class="col-md-4 col-6 weather-icon">
+      <img class="img" src="assets/animated/{{ detailData.weather[0].main }}.svg">
+    </div>
+    <div class="col-md-6 col-6">
+      <div class="p-2">
+        {{ (detailData.main.temp-273.15) | number:'1.0-0' }}<sup>C</sup>
+      </div>
+      <div class="p-2">
+        {{ detailData.weather[0].main }}
+      </div>
+      <div class="p-2">
+        wind: {{ detailData.wind.speed }}ms {{ detailData.wind.deg }}deg
+      </div>
+      <div class="p-2">
+        Pressure {{ detailData.main.pressure }}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" *ngIf="futureData">
+      <ul class="list-group list-group-horizontal">
+        <div class="text-center" *ngFor="let item of futureData.list">
+          <li class="list-group-item borderless">
+            <div>
+              {{ item.dt*1000 | date:'d' }}
+            </div>
+            <div>
+              {{ item.dt*1000 | date:'E' }}
+            </div>
+            <span><img class="img" src="assets/animated/{{ item.weather[0].main }}.svg"></span>
+            <span class="">{{ (item.temp.day-273.15) | number:'1.0-0' }}<sup>C</sup></span>
+          </li>
+        </div>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<ng-template #blankPage>
+  <div class="col-md-12 text-center p-4 detail-desc">
+    Detail Weather Forecast
+  </div>
+</ng-template>

@@ -1,0 +1,50 @@
+$black: #333
+
+.search
+  width: 80%
+  background-color: transparent
+  border: 0
+  outline: 0
+  margin-right: 10px
+  padding: 10px
+  border-width: 0 0 2px
+  border-bottom: 1px solid #50252559
+  color: $black
+  font-size: 16px
+  transition: box-shadow 0.3s ease-in-out
+
+.search:focus
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3)
+
+::placeholder //Chrome, Firefox, Opera, Safari 10.1+
+  color: $black
+  opacity: 1 // Firefox
+
+:-ms-input-placeholder //Internet Explorer 10-11
+  color: $black
+
+::-ms-input-placeholder  // Microsoft Edge
+  color: $black
+
+.cursor
+  cursor: pointer
+
+.snackbar-wrap
+  padding: 10px 10px
+  border-radius: 5px
+  min-width: 20%
+  max-width: 90%
+  text-align: center
+  margin-top: 2px
+  &.error
+    background-color: #dc3545
+
+.snackbar-wrap .snackbar-text
+  color: #ffffff
+  margin: 0
+
+.disabled
+  pointer-events: none
+
+.notAllowed
+  cursor: not-allowed

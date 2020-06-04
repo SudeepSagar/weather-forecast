@@ -1,0 +1,15 @@
+<ngx-spinner></ngx-spinner>
+<div class="col-md-12">
+  <input class="search" #searchVal [(ngModel)]="searchText" name="searchText" type="text" placeholder="Type city name"
+    aria-label="Search" min="3">
+  <span class="close mt-2" [class.notAllowed]="!searchVal.value"><i class="fa fa-plus cursor"
+      [class.disabled]="!searchVal.value" [attr.disabled]="!searchVal.value" (click)="addToList()"></i></span>
+
+  <div *ngIf="msgShow" [ngClass]="['snackbar-wrap', msgType]">
+    <span class="snackbar-text">
+      <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+      {{ errorMsg }}
+    </span>
+
+  </div>
+</div>

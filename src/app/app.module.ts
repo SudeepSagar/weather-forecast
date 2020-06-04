@@ -1,16 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ListPageComponent } from './list-page/list-page.component';
+import { DetailPageComponent } from './detail-page/detail-page.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ListPageComponent,
+    DetailPageComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
