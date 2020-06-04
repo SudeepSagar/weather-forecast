@@ -48,12 +48,11 @@ export class ListPageComponent implements OnInit {
     this.currentTemp.splice(0, this.currentTemp.length);
   }
 
-  showDetail(index) {
+  async showDetail(index) { // demonstration of async and await in JS
     this.sharedService.sendToDetail(this.currentTemp[index]);
-    const futreReadings = this.sharedService.getFutureDaysForecast(this.currentTemp[index].name);
-    futreReadings.then((jsonData) => {
-      this.sharedService.sendFutureReadings(jsonData);
-    });
+    const futreReadings = await this.sharedService.getFutureDaysForecast(this.currentTemp[index].name);
+    const finalData = JSON.parse(JSON.stringify(futreReadings));
+    this.sharedService.sendFutureReadings(finalData);
   }
 
 }

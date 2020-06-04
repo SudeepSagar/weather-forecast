@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedDataService {
   APP_ID = 'c51223c219d6aec8cb8c5210449bd859';
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   private seachParam = new BehaviorSubject<any>(null);
   public seachParam$ = this.seachParam.asObservable();
@@ -22,9 +23,10 @@ export class SharedDataService {
   public futureData$ = this.futureData.asObservable();
 
   // working API call method
-  public getFutureDaysForecast(cityName) {
+  public async getFutureDaysForecast(cityName) {
     const apiUrl = environment.apiUrl + `data/2.5/forecast/daily?q=${cityName}&cnt=5&appid=${this.APP_ID}`;
-    return fetch(apiUrl).then(res => res.json());
+    const testt = this.http.get(apiUrl).toPromise();
+    return await this.http.get(apiUrl).toPromise();
   }
 
   public getCurrentTemp(cityName) {
