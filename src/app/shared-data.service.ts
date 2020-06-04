@@ -25,7 +25,6 @@ export class SharedDataService {
   // working API call method
   public async getFutureDaysForecast(cityName) {
     const apiUrl = environment.apiUrl + `data/2.5/forecast/daily?q=${cityName}&cnt=5&appid=${this.APP_ID}`;
-    const testt = this.http.get(apiUrl).toPromise();
     return await this.http.get(apiUrl).toPromise();
   }
 
