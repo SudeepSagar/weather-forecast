@@ -1,42 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { SharedDataService } from '../shared-data.service';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { Component, OnInit } from "@angular/core";
+import { Subscription } from "rxjs";
+import { SharedDataService } from "../shared-data.service";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
-  selector: 'app-detail-page',
-  templateUrl: './detail-page.component.html',
-  styleUrls: ['./detail-page.component.sass']
+  selector: "app-detail-page",
+  templateUrl: "./detail-page.component.html",
+  styleUrls: ["./detail-page.component.sass"],
 })
 export class DetailPageComponent implements OnInit {
-
   subscription: Subscription;
   detailData: any;
   futureData: any;
+  refresh = false;
 
-  constructor(private sharedService: SharedDataService, private spinner: NgxSpinnerService) {
+  constructor(
+    private sharedService: SharedDataService,
+    private spinner: NgxSpinnerService
+  ) {
     this.subscription = this.sharedService.detailData$.subscribe(
-      detailData => {
+      (detailData) => {
         this.detailData = detailData;
-      });
+      }
+    );
 
     this.subscription = this.sharedService.futureData$.subscribe(
-      futureData => {
+      (futureData) => {
         this.futureData = futureData;
-
-      });
+      }
+    );
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   refreshAll(cityName) {
+    this.refresh = true;
     this.spinner.show();
     const futreReadings = this.sharedService.getFutureDaysForecast(cityName);
     futreReadings.then((jsonData) => {
       this.sharedService.sendFutureReadings(jsonData);
       this.spinner.hide();
+      this.refresh = false;
     });
   }
-
 }

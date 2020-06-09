@@ -2,8 +2,9 @@
 <div class="detail-desc" *ngIf="detailData; else blankPage">
   <span class="city-name font-weight-bold">{{ detailData.name }}</span>
   <div class="pull-right refresh">
-    <span class="close cursor">
-      <i class="fa fa-refresh" (click)="refreshAll(detailData.name)"></i>
+    <span class="cursor">
+      <i class="fa fa-refresh fa-spin" *ngIf="refresh"></i>
+        <i class="fa fa-refresh" *ngIf="!refresh" (click)="refreshAll(detailData.name)"></i>
     </span>
   </div>
 
