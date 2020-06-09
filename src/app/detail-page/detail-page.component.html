@@ -10,7 +10,7 @@
 
   <div class="row p-4">
     <div class="col-md-4 col-6 weather-icon">
-      <img class="img" src="/assets/animated/{{ detailData.weather[0].main }}.svg"
+      <img class="img" src="assets/animated/{{ detailData.weather[0].main }}.svg"
         onerror="this.src='assets/animated/cloudy-day-1.svg';" alt="..." />
     </div>
     <div class="col-md-6 col-6">
@@ -39,7 +39,7 @@
             <div>
               {{ item.dt*1000 | date:'E' }}
             </div>
-            <span><img class="img" src="/assets/animated/{{ item.weather[0].main }}.svg"
+            <span><img class="img" src="assets/animated/{{ item.weather[0].main }}.svg"
                 onerror="this.src='assets/animated/cloudy-day-1.svg';" alt="..." /></span>
             <span class="">{{ (item.temp.day-273.15) | number:'1.0-0' }}<sup>&deg;C</sup></span>
           </li>
