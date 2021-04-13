@@ -10,7 +10,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class DetailPageComponent implements OnInit {
   subscription: Subscription;
-  detailData: any;
+  detailData;
   futureData: any;
   refresh = false;
 
@@ -33,7 +33,7 @@ export class DetailPageComponent implements OnInit {
 
   ngOnInit() {}
 
-  refreshAll(cityName) {
+  refreshAll(cityName): void {
     this.refresh = true;
     this.spinner.show();
     const futreReadings = this.sharedService.getFutureDaysForecast(cityName);

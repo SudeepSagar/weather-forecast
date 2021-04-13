@@ -13,7 +13,7 @@ export class SharedDataService {
   private seachParam = new BehaviorSubject<any>(null);
   public seachParam$ = this.seachParam.asObservable();
 
-  private currentTemp = new BehaviorSubject<any>(null);
+  private currentTemp = new BehaviorSubject<any>([]);
   public currentTemp$ = this.currentTemp.asObservable();
 
   private detailData = new BehaviorSubject<any>(null);

@@ -4,47 +4,89 @@
   <div class="pull-right refresh">
     <span class="cursor">
       <i class="fa fa-refresh fa-spin" *ngIf="refresh"></i>
-        <i class="fa fa-refresh" *ngIf="!refresh" (click)="refreshAll(detailData.name)"></i>
+      <i class="fa fa-refresh" *ngIf="!refresh" (click)="refreshAll(detailData.name)"></i>
     </span>
   </div>
 
-  <div class="row p-4">
+  <div class="row p-3">
     <div class="col-md-4 col-6 weather-icon">
-      <img class="img" src="assets/animated/{{ detailData.weather[0].main }}.svg"
+      <img class="img float-right" src="assets/animated/{{ detailData.weather[0].main }}.svg"
         onerror="this.src='assets/animated/cloudy-day-1.svg';" alt="..." />
     </div>
     <div class="col-md-6 col-6">
-      <div class="p-2">
-        {{ (detailData.main.temp-273.15) | number:'1.0-0' }}<sup>&deg;C</sup>
+      <div class="p-2 display-4">
+        {{ (detailData.main.temp-273.15) | number:'1.0-0' }}<sup>&deg;</sup><span>C</span>
       </div>
       <div class="p-2">
         {{ detailData.weather[0].main }}
       </div>
       <div class="p-2">
-        wind: {{ detailData.wind.speed }}ms {{ detailData.wind.deg }}deg
-      </div>
-      <div class="p-2">
-        Pressure {{ detailData.main.pressure }}
+        <i class="fa fa-arrow-up"></i> {{ detailData.main.temp_max-273.15 | number:'1.0-0' }} &nbsp;&nbsp;&nbsp; <i
+          class="fa fa-arrow-down"></i> {{ detailData.main.temp_min-273.15 | number:'1.0-0' }}
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12" *ngIf="futureData">
-      <ul class="list-group list-group-horizontal">
-        <div class="text-center" *ngFor="let item of futureData.list">
-          <li class="list-group-item borderless">
-            <div>
-              {{ item.dt*1000 | date:'d' }}
-            </div>
-            <div>
-              {{ item.dt*1000 | date:'E' }}
-            </div>
-            <span><img class="img" src="assets/animated/{{ item.weather[0].main }}.svg"
-                onerror="this.src='assets/animated/cloudy-day-1.svg';" alt="..." /></span>
-            <span class="">{{ (item.temp.day-273.15) | number:'1.0-0' }}<sup>&deg;C</sup></span>
-          </li>
+
+  <div class="row details mb-3" *ngIf="futureData">
+    <div class="m-2 w-100 text-uppercase text-left">
+      details
+    </div>
+    <div class="col-md-6">
+      <div class="p-1 text-uppercase">
+        wind
+      </div>
+      <div class="mb-3">
+        {{ detailData.wind.speed*3.6 | number:'1.1-1' }} km/h {{ detailData.wind.deg }}<sup>&deg;</sup>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="p-1 text-uppercase">
+        Humidity
+      </div>
+      <div class="mb-3">
+        {{ detailData.main.humidity }} %
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="p-1 text-uppercase">
+        Visibility
+      </div>
+      <div class="mb-3">
+        {{ detailData.visibility/1000 }} km
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="p-1 text-uppercase">
+        Pressure
+      </div>
+      <div class="mb-3">
+        {{ detailData.main.pressure }} hPa
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="futureData">
+    <div class="col-md-12">
+      <div class="dailyForecast">
+        <div class="text-label-foreast text-uppercase">
+          Daily forecast
         </div>
-      </ul>
+        <ul class="list-group list-group-horizontal">
+          <div class="text-center" *ngFor="let item of futureData.list">
+            <li class="list-group-item borderless">
+              <div>
+                {{ item.dt*1000 | date:'E' }}
+              </div>
+              <div>
+                {{ item.dt*1000 | date:'MMM d' }}
+              </div>
+              <span><img class="img" src="assets/animated/{{ item.weather[0].main }}.svg"
+                  onerror="this.src='assets/animated/cloudy-day-1.svg';" alt="..." /></span>
+              <span class="">{{ (item.temp.day-273.15) | number:'1.0-0' }}<sup>&deg;C</sup></span>
+            </li>
+          </div>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

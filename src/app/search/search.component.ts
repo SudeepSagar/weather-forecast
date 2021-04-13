@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SharedDataService } from '../shared-data.service';
 import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -20,10 +20,15 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   constructor(private sharedService: SharedDataService, private spinner: NgxSpinnerService) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  triggerClickEvent(e): void {
+    if (this.searchText && e.keyCode === 13) {
+      this.addToList();
+    }
   }
 
-  addToList() {
+  addToList(): void {
     this.spinner.show();
     const resultData = this.sharedService.getCurrentTemp(this.searchText);
     resultData.then((jsonData) => {
@@ -49,6 +54,10 @@ export class SearchComponent implements OnInit, OnDestroy {
       }
       this.searchText = '';
     });
+  }
+
+  clearModal(): void {
+    this.msgShow = false;
   }
 
   ngOnDestroy(): void {

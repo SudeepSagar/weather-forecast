@@ -1,24 +1,27 @@
+<ngx-spinner></ngx-spinner>
 <div class="recent-location">
   Recent locations
 </div>
-<div class="list-page" *ngIf="currentTemp">
-  <div class="added-location" *ngFor="let item of currentTemp; let i = index">
-    <span class="" style="cursor: pointer;" *ngIf="item" (click)="showDetail(i)">
-      {{ item.name }} - {{ (item.main.temp-273.15) |number : '1.0-0' }}<sup>&deg;C</sup> {{ item.weather[0].main }}
-      <img class="img" src="assets/animated/{{ item.weather[0].main }}.svg"
-        onerror="this.src='assets/animated/cloudy-day-1.svg';" alt="..." />
-    </span>
-    <div class="pull-right mt-2">
-      <span class="close">
-        <i class="fa fa-close" (click)="rmvFromWeatherList(i)"></i>
-      </span>
-      <span class="close">
-        <i class="fa fa-refresh fa-spin" *ngIf="refresh"></i>
-        <i class="fa fa-refresh" *ngIf="!refresh" (click)="refreshWeather(item.name)"></i>
-      </span>
+<div class="weatherBlock" *ngIf="currentTemperature.length > 0">
+  <div class="list-page">
+    <div class="added-location" *ngFor="let item of currentTemperature; let i = index">
+      <div class="" style="cursor: pointer;" *ngIf="item" (click)="showDetail(i)">
+        {{ item.name }} - {{ (item.main.temp-273.15) |number : '1.0-0' }}<sup>&deg;C</sup> {{ item.weather[0].main }}
+        <img class="img" src="assets/animated/{{ item.weather[0].main }}.svg"
+          onerror="this.src='assets/animated/cloudy-day-1.svg';" alt="..." />
+      </div>
+      <div class="text-right mt-2">
+        <span class="add">
+          <i class="fa fa-close" (click)="rmvFromWeatherList(i)"></i>
+        </span>
+        <span class="add">
+          <i class="fa fa-refresh fa-spin" *ngIf="refresh"></i>
+          <i class="fa fa-refresh" *ngIf="!refresh" (click)="refreshWeather(item.name)"></i>
+        </span>
+      </div>
     </div>
   </div>
-</div>
-<div class="clear">
-  <button type="button" class="btn btn-danger clearBtn" (click)="clearListData()">Clear</button>
+  <div class="clear">
+    <button type="button" class="btn btn-danger clearBtn" (click)="clearListData()">Clear</button>
+  </div>
 </div>
